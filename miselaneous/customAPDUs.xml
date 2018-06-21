@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<allAPDUs>
+
+	<apdu class="ISO/IEC 7816-4"><!-- Select App -->
+		<name>Select Application</name>
+		<bytes>00 A4 04 00</bytes>
+		<option>
+			<name>MasterCard</name>
+			<bytes>A0000000041010</bytes>
+			<tag>
+				<value>6F</value>
+				<name>Template</name>
+			</tag>
+			<tag>
+				
+			</tag>
+		</option>
+		<option>
+			<name>Visa</name>
+			<bytes>A0000000031010</bytes>
+		</option>
+	</apdu> <!-- /Select App -->
+	
+	
+	<apdu class="Other Norm" name="Other apdu">
+		<name>Other APDU</name>
+		<bytes>FF FF FF FF</bytes>
+		<option>
+			<name>MasterCard blabla</name>
+			<bytes>A0000000041010</bytes>
+		</option>
+		<option>
+			<name>Visa blabla</name>
+			<bytes>A0000000031010</bytes>
+		</option>
+	</apdu>
+</allAPDUs>

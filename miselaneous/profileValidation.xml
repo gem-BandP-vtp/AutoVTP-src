@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tests>
+	<profile>
+		<options>
+			<radio mandatory="true" id="1">
+				<title>Payment Scheme</title>
+				<item>Visa</item>
+				<item>MasterCard</item>
+				<item>Other</item>
+			</radio>	
+			<combobox mandatory="true" id="2">
+				<title>Interface</title>
+				<item>Contact</item>
+				<item>Contactless</item>			
+			</combobox>			
+		</options>		
+	</profile>
+	<validations>
+		
+		VISA CONTACT/CONTACTLESS
+		
+		Before Start
+		<validation radio_1="Visa">
+			<title>Receive input file</title>
+			<description></description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Receive Payment Scheme Risk Parameters</title>
+			<description>Scheme document card risk parameter values</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Receive Keys and Certificates</title>
+			<description>If appliable</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate IF Data x Risk Parameters document</title>
+			<description>Compare the data into the IF with the data received into the Scheme Risk Parameters</description>
+		</validation>
+		
+		Finishing Profile
+		<validation radio_1="Visa">
+			<title>Validate profile values x Input File</title>
+			<description>Check if the tags values are equal to the values into the IF</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate tags source (static, from input file, etc)</title>
+			<description>All the tags that comes from dc9 must be "from input file" or defined in a PDA</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate the profile structure x Template</title>
+			<description>Compare the profile structure with the structure defined into the Visa Template</description>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Validate AFL for qVSDC</title>
+			<description>Tag 9F69 must be present in the last record specified in the AFL. Recommended to be the last tag from the record.</description>
+		</validation>
+		
+		Transaction
+		<validation radio_1="Visa">
+			<title>Standard Barnes CPT Scenario</title>
+			<description>Run the correspondent Scenario in Barnes</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate Card Data and Structure</title>
+			<description>Get All Data and compare with IF, Payment Scheme Risk Parameters document and Profile</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate Online Transaction</title>
+			<description>Check the 1st and 2nd Generate AC result</description>
+		</validation>
+		<validation radio_1="Visa">
+			<title>Validate Offline Transaction</title>
+			<description>Check the 1st Generate AC result</description>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Validate DDA</title>
+			<description>Check DDA result</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/DDAValidation/DDAValidation.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Validate DDA</title>
+			<description>Check DDA result</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Validate CDA</title>
+			<description>Check CDA result</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/CDAValidation/CDAValidation.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Validate CDA</title>
+			<description>Check CDA result</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Validate Cryptogram</title>
+			<description>The right AC key must be defined</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/OnlineValidation/OnlineValidation.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Validate Cryptogram</title>
+			<description>The right AC key must be defined</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Validate PIN</title>
+			<description>This script only validates Offline Plaintext PIN.</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/PINVerify/PINVerify.js</script>
+		</validation>		
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Read Transaction Log</title>
+			<description>If appliable</description>
+		</validation>		
+		
+		Scripts
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Application Block</title>
+			<description>Block the application</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/AppBlock/AppBlockValidation.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Application Unblock</title>
+			<description>Unblock the application after block it</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/AppUnBlock/AppUnBlockValidation.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>PIN Update</title>
+			<description>Update PIN value and validate new value</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/PINChange/PINChange.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>PIN Unblock</title>
+			<description>Block PIN and run PIN Unblock script</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/PINUnblock/PINUnblock.js</script>
+		</validation>		
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>PUT DATA</title>
+			<description>Run Put Data to some changeable tag (see the PARAMETERS.js file)</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/PUTData/PUTData.js</script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contact">
+			<title>Update Record</title>
+			<description>Run Update Record for the specified record in the PARAMETERS.js file</description>
+			<script>Payment Profile Scripts/02 - Visa Credit/UpdateRecord/UpdateRecord.js</script>
+		</validation>			
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Application Block</title>
+			<description>Block the application</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Application Unblock</title>
+			<description>Unblock the application after block it</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>PIN Update</title>
+			<description>Update PIN value and validate new value</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>PIN Unblock</title>
+			<description>Block PIN and run PIN Unblock script</description>
+			<script></script>
+		</validation>		
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>PUT DATA</title>
+			<description>Run Put Data to some changeable tag (see the PARAMETERS.js file)</description>
+			<script></script>
+		</validation>
+		<validation radio_1="Visa" combobox_2="Contactless">
+			<title>Update Record</title>
+			<description>Run Update Record for the specified record in the PARAMETERS.js file</description>
+			<script></script>
+		</validation>	
+
+		
+	</validations>
+</tests>
